@@ -1,0 +1,5 @@
+Requiered:
+    1. venv
+    2. requests
+    3. django
+    4. djangorestframework
