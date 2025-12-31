@@ -1,1 +1,6 @@
 venv/
+# Ignorar todos los archivos de Word
+*.docx
+
+# Ignorar todos los archivos PDF
+*.pdf
