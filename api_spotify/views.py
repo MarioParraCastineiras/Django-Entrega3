@@ -23,9 +23,7 @@ class SpotifyViewSet(viewsets.ViewSet):
 
         if not username:
              return Response(
-                 {"detail": "You must provide a username"},
-                 status=status.HTTP_400_BAD_REQUEST
-             )
+                 {"detail": "You must provide a username"},status=status.HTTP_400_BAD_REQUEST)
 
         try:
              user = User.objects.get(username=username)
@@ -41,10 +39,7 @@ class SpotifyViewSet(viewsets.ViewSet):
             SPOTIFY_ACCESS_TOKEN = token
         except Exception as e:
             print(f"Error obteniendo el token: {e}")
-            return Response(
-                {"detail": "Token could not be generated"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+            return Response({"detail": "Token could not be generated"},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response({"access_token": token})
 
     @action(detail=False, methods=['get'], url_path='artist/(?P<artist_id>[^/.]+)')
