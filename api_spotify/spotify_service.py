@@ -6,14 +6,6 @@ SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_API_BASE = "https://api.spotify.com/v1"
 
 
-import requests
-import base64
-
-
-SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
-SPOTIFY_API_BASE = "https://api.spotify.com/v1"
-
-
 def get_token(client_id: str, client_secret: str) -> str:
     basic_auth = f"{client_id}:{client_secret}"
     encoded = base64.b64encode(basic_auth.encode()).decode()
