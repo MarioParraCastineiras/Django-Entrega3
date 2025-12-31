@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
+from api_users.models import User
 
 from .spotify_service import (
     get_token,
@@ -18,6 +19,19 @@ class SpotifyViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['post'], url_path='token')
     def token(self, request):   
         global SPOTIFY_ACCESS_TOKEN  # Usamos la variable global
+        username = request.data.get("username")
+
+        if not username:
+             return Response(
+                 {"detail": "You must provide a username"},
+                 status=status.HTTP_400_BAD_REQUEST
+             )
+
+        try:
+             user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            return Response({"detail": "User not registered"},status=status.HTTP_404_NOT_FOUND)
+
         try:
             token = get_token(
                 settings.SPOTIFY_CLIENT_ID,
